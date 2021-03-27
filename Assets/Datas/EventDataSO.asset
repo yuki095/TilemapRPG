@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476db1e79349743c288ff1d6d22d0fc1, type: 3}
+  m_Name: EventDataSO
+  m_EditorClassIdentifier: 
+  eventDataList:
+  - eventType: 0
+    no: 0
+    title: Dog
+    dialog: "\u308F\u3093\u308F\u3093\uFF01"
+    eventSprite: {fileID: 0}
+  - eventType: 0
+    no: 1
+    title: "\u6751\u4EBA1"
+    dialog: "\u4ECA\u65E5\u306F\u3044\u3044\u5929\u6C17\u3067\u3059\u308F\u306D"
+    eventSprite: {fileID: 0}
+  - eventType: 0
+    no: 2
+    title: "\u5E97\u54E11"
+    dialog: "\u3044\u3089\u3063\u3057\u3083\u3044\uFF01\n\u4ECA\u65E5\u306F\u4F55\u3092\u304A\u6C42\u3081\u3067\uFF1F"
+    eventSprite: {fileID: 0}
