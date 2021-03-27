@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476db1e79349743c288ff1d6d22d0fc1, type: 3}
   m_Name: EventDataSO
   m_EditorClassIdentifier: 
-  eventDataList:
+  eventDatasList:
   - eventType: 0
     no: 0
     title: Dog
@@ -21,7 +21,7 @@ MonoBehaviour:
   - eventType: 0
     no: 1
     title: "\u6751\u4EBA1"
-    dialog: "\u4ECA\u65E5\u306F\u3044\u3044\u5929\u6C17\u3067\u3059\u308F\u306D"
+    dialog: "\u4ECA\u65E5\u306F\u3044\u3044\u5929\u6C17\u3067\u3059\u308F\u306D\u3002"
     eventSprite: {fileID: 0}
   - eventType: 0
     no: 2

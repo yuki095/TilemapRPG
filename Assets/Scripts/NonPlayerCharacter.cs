@@ -12,6 +12,14 @@ public class NonPlayerCharacter : MonoBehaviour
     private Vector3 defaultPos;
     private Vector3 offsetPos;
 
+    private EventData.EventType eventType = EventData.EventType.Talk;   // NPCとの会話イベントとして設定
+
+    [SerializeField, Header("NPC会話イベントの通し番号")]
+    private int npcTalkEventNo;
+
+    [SerializeField, Header("NPC会話イベントのデータ")]
+    private EventData eventData;
+
     private void Start()
     {
         // このNonPlayerCharacterスクリプトがアタッチされているオブジェクトの、子オブジェクトにアタッチされている
@@ -23,6 +31,9 @@ public class NonPlayerCharacter : MonoBehaviour
 
         // 会話ウィンドウのy軸を-3.0f移動させて代入
         offsetPos = new Vector3(dialogController.transform.position.x, dialogController.transform.position.y - 3.0f, dialogController.transform.position.z);
+
+        // DataBaseManagerに登録したスクリプタブル・オブジェクトを検索し、指定した通し番号のEventDataを取得して代入
+        eventData = DataBaseManager.instance.GetEventDataFromNPCEvent(npcTalkEventNo);
     }
 
     /// <summary>
@@ -44,7 +55,7 @@ public class NonPlayerCharacter : MonoBehaviour
         }
 
         // 会話イベントのウィンドウを表示
-        dialogController.DisplayDialog();
+        dialogController.DisplayDialog(eventData);
 
         // Debug.Log("会話ウィンドウを開く");
     }

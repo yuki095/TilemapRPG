@@ -15,11 +15,13 @@ public class DialogController : MonoBehaviour
     [SerializeField]
     private CanvasGroup canvasGroup = null;
 
-    [SerializeField]
-    private string titleName = "dog";
+    // [SerializeField]
+    // private string titleName = "dog";
+    // [SerializeField]
+    // private string dialog = "ワンワン！";
 
     [SerializeField]
-    private string dialog = "ワンワン！";
+    private EventData eventData;   // NonPlayerCharacterスクリプトから届くEventDataの情報を代入するための変数
 
     private void Start()
     {
@@ -32,16 +34,29 @@ public class DialogController : MonoBehaviour
     private void SetUpDialog()
     {
         canvasGroup.alpha = 0.0f;           // 透明度を0にする
-        txtTitleName.text = titleName;
+
+        // txtTitleName.text = titleName;
+
+        eventData = null;                   // EventDataを初期化
     }
 
     /// <summary>
     /// ダイアログの表示
     /// </summary>
-    public void DisplayDialog()
+    public void DisplayDialog(EventData eventData)
     {
+        if(this.eventData == null)
+        {
+            this.eventData = eventData;
+        }
+
         canvasGroup.DOFade(1.0f, 0.5f);      // フェードイン　0.5秒かけて透明度を1に
-        txtDialog.DOText(dialog, 1.0f).SetEase(Ease.Linear);    // 1文字ずつ表示する（表示間隔を一定にする）
+
+        txtTitleName.text = this.eventData.title;
+
+        txtDialog.DOText(this.eventData.dialog, 1.0f).SetEase(Ease.Linear);  // 1文字ずつ表示する（表示間隔を一定にする）
+
+        // TODO 画像データがある場合は、Image型の変数にeventData.eventSpriteを代入
     }
 
     /// <summary>
