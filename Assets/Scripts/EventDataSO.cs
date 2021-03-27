@@ -4,5 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EventDataSO", menuName = "Create EventDataSO")]
 public class EventDataSO : ScriptableObject
 {
-    public List<EventData> eventDataList = new List<EventData>();
+    // リストの初期化
+    public List<EventData> eventDatasList = new List<EventData>();　// 複数のEventDataを1つの変数内でまとめて管理
 }
