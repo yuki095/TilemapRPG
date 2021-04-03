@@ -45,10 +45,13 @@ public class DialogController : MonoBehaviour
     /// </summary>
     public void DisplayDialog(EventData eventData)
     {
-        if(this.eventData == null)
-        {
-            this.eventData = eventData;
-        }
+        //    if(this.eventData == null)
+        //    {
+        //        Debug.Log("通過");
+        //        this.eventData = eventData;
+        //    }
+
+        this.eventData = eventData;
 
         canvasGroup.DOFade(1.0f, 0.5f);      // フェードイン　0.5秒かけて透明度を1に
 

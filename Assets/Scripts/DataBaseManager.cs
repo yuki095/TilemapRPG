@@ -14,7 +14,7 @@ public class DataBaseManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);  // シーン遷移しても破壊されないオブジェクト
         }
         else
         {
@@ -33,6 +33,7 @@ public class DataBaseManager : MonoBehaviour
         // 1つずつ順番に取り出して、eventData変数に代入
         foreach (EventData eventData in eventDataSO.eventDatasList)
         {
+            Debug.Log(eventData.no);
             // eventDataの情報を判定し、EventTypeがTalkかつ、引数で取得しているnpcEventNoと同じ場合
             if (eventData.eventType == EventData.EventType.Talk && eventData.no == npcEventNo)
             {

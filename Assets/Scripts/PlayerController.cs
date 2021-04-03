@@ -18,22 +18,38 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookDirection = new Vector2(0, -1.0f);  // キャラの向きの情報の設定用
 
     [Header("会話イベント判定用")]
-    private bool isTalking;     // 会話中かどうかの判定用
+    public bool isTalking;     // 会話中かどうかの判定用
+
+    private EncountManager encountManager;   // EncountManagerクラスの情報を代入するための変数
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();   // Rigidbody2Dコンポーネントの情報を取得して代入
         anim = GetComponent<Animator>();    // Animatorコンポーネントの情報を取得して代入
+
+        // エンカウント後なら（ゲーム開始時には実行しない）
+        if (GameData.instance.isEncounting)
+        {
+            // エンカウント時のプレイヤーの位置に戻す
+            transform.position = GameData.instance.GetCurrentPlayerPos();
+
+            // エンカウント状態を解除
+            GameData.instance.isEncounting = false;
+
+            // 向きを取得してアニメを再現
+            lookDirection = GameData.instance.GetCurrentLookDirection();
+            anim.SetFloat("Look X", lookDirection.x);
+            anim.SetFloat("Look Y",lookDirection.y);
+        }
     }
 
     void Update()
     {
-        Action();          // アクション
+        Action();  　// アクション
 
-        // 会話中の場合は移動キーの入力を受け付けない
-        if (isTalking)
+        if (isTalking)     // 会話中の場合は 
         {
-            return;
+            return;        // ここで処理を終わらせる（移動キーの入力を受け付けない）
         }
 
         // InputManagerに登録してあるキーが入力されたら、x／y方向の入力値として代入
@@ -55,6 +71,14 @@ public class PlayerController : MonoBehaviour
     {
         // velocity（速度）に新しい値を代入してゲームオブジェクトを移動
         rb.velocity = new Vector2(horizontal * moveSpeed, vertical * moveSpeed);
+
+        // プレイヤーのmagnitude（ベクトルの長さ）が0.5よりも大きく（プレイヤーが移動していて）、
+        // encountManager変数にEncountManagerの情報が代入されている場合
+        if (rb.velocity.magnitude > 0.5f && encountManager)
+        {
+            // ランダムエンカウントが発生しているかどうか判定
+            encountManager.JudgeRondomEncount();
+        }
     }
 
     /// <summary>
@@ -117,5 +141,25 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// PlayerControllerに必要な外部のクラス情報を設定
+    /// </summary>
+    /// <param name="encountManager"></param>
+    public void SetUpPlayerController(EncountManager encountManager)
+    {
+        // EncountManagerクラスの情報を取得して代入する
+        this.encountManager = encountManager;
+    }
+
+    /// <summary>
+    /// 向いている方向を戻す
+    /// </summary>
+    /// <returns></returns>
+    public Vector2 GetLookDirection()
+    {
+        // 現在のキャラの向きの情報を渡す
+        return lookDirection;
     }
 }
