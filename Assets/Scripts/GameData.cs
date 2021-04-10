@@ -7,16 +7,22 @@ using System.Linq;      // 統合言語クエリ
 public class GameData : MonoBehaviour
 {
     public static GameData instance;    // シングルトンデザインパターンにするための変数
-
     public int randomEncountRate;       // エンカウントの発生率
-
     public bool isEncounting;           // エンカウントしているかの判定
-
     public bool isDebug;                // デバッグ用の変数（Trueならエンカウント状態をリセットできる）
-
-    private Vector3 currentPlayerPos;       // エンカウント時のプライヤーの位置
-
+    private Vector3 currentPlayerPos;       // エンカウント時のプレイヤーの位置
     private Vector2 currentLookDirection;   // エンカウント時のプレイヤーの向き
+
+    [System.Serializable]
+    public class ItemInventryData
+    {
+        public ItemName itemName;   // アイテムの名前
+        public int count;           // 所持数
+        public int number;          // 所持している通し番号
+    }
+
+    [Header("所持アイテムのリスト")]
+    public List<ItemInventryData> itemInventryDatasList = new List<ItemInventryData>();
 
     void Awake()
     {
@@ -52,5 +58,24 @@ public class GameData : MonoBehaviour
     public Vector2 GetCurrentLookDirection()
     {
         return currentLookDirection;
+    }
+
+    /// <summary>
+    /// ItemInventryDatasListの最大数を取得
+    /// </summary>
+    /// <returns></returns>
+    public int GetItemInventryListCount()
+    {
+        return itemInventryDatasList.Count;
+    }
+
+    /// <summary>
+    /// ItemInventryDatasListの中から指定した番号のIteminventryData情報を取得
+    /// </summary>
+    /// <param name="no"></param>
+    /// <returns></returns>
+    public ItemInventryData GetItemInventryData(int no)
+    {
+        return itemInventryDatasList[no];
     }
 }
