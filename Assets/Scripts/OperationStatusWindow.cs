@@ -12,6 +12,11 @@ public class OperationStatusWindow : MonoBehaviour
     [SerializeField]
     private GameObject[] windowLists;
 
+    private void Start()
+    {
+       propertyWindow.SetActive(false);
+    }
+
     private void Update()
     {
         // ステータス画面のon/off
@@ -26,11 +31,15 @@ public class OperationStatusWindow : MonoBehaviour
     // ステータス画面のウィンドウのon/offメソッド
     public void ChangeWindow(GameObject window)
     {
-        foreach(var item in windowLists)
+        foreach(GameObject item in windowLists)
         {
             if(item == window)
             {
+                Debug.Log(item.name);  // 今回表示されるウィンドウの名前を確認
+
+                // メインウィンドウを表示
                 item.SetActive(true);
+                // フォーカス状態を解除
                 EventSystem.current.SetSelectedGameObject(null);
             }
             else
@@ -38,6 +47,7 @@ public class OperationStatusWindow : MonoBehaviour
                 item.SetActive(false);
             }
             // それぞれのウィンドウのMenuAreaの最初の子要素をアクティブ状態にする
+            // MenuAreaの一番上のゲームオブジェクトにフォーカスする
             EventSystem.current.SetSelectedGameObject(window.transform.Find("MenuArea").GetChild(0).gameObject);
         }
     }

@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
 
     private EncountManager encountManager;   // EncountManagerクラスの情報を代入するための変数
 
+    [SerializeField]
+    private GameObject propertyWindow;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();   // Rigidbody2Dコンポーネントの情報を取得して代入
@@ -52,6 +55,11 @@ public class PlayerController : MonoBehaviour
             return;        // ここで処理を終わらせる（移動キーの入力を受け付けない）
         }
 
+        if (propertyWindow.activeSelf == true) // ステータス画面が開いている場合
+        {
+            return;
+        }
+
         // InputManagerに登録してあるキーが入力されたら、x／y方向の入力値として代入
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
@@ -61,6 +69,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (propertyWindow.activeSelf == true)
+        {
+            rb.velocity = Vector2.zero;   // 速度を０にする
+            return;
+        }
+
         Move();           // 移動
     }
 

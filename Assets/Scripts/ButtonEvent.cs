@@ -36,23 +36,26 @@ public class ButtonEvent : MonoBehaviour
     // オンマウス、またはキー操作で該当のボタンに移動したとき
     public void OnSelected()
     {
+        // 親にCanvasGroupがついていない、または非表示になっている場合
         if (canvasGroup == null || canvasGroup.interactable)
         {
-            // イベントシステムのフォーカス（？）がこのゲームオブジェクトにない時
+            Debug.Log(canvasGroup);
+
+            // イベントシステムのフォーカスがこのゲームオブジェクトにない時
             if (EventSystem.current.currentSelectedGameObject != gameObject)
             {
                 // このゲームオブジェクトにフォーカスさせる
                 EventSystem.current.SetSelectedGameObject(gameObject);
             }
             // インフォメーションテキストに文字列を表示
-            informationText.text = informationString;
+            // informationText.text = informationString;
         }
     }
 
     // ボタンから移動したらテキストの情報を削除
     public void OnDeselected()
     {
-        informationText.text = "";
+        // informationText.text = "";
     }
 
     public void DisableWindow()
@@ -66,8 +69,11 @@ public class ButtonEvent : MonoBehaviour
     // 他の画面を表示する
     public void WindowOnOff(GameObject window)
     {
+        Debug.Log("次に開くウィンドウ:" + window.name);
+
         if (canvasGroup == null || canvasGroup.interactable)
         {
+            // MainCameraタグがついているゲームオブジェクトに対して動く
             Camera.main.GetComponent<OperationStatusWindow>().ChangeWindow(window);
         }
     }
