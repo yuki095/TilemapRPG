@@ -30,9 +30,9 @@ public class ItemButtonDetail : MonoBehaviour
     /// <param name="count">アイテムの所持数</param>
     public void SetUpItemButtonDetail(ItemDataSO.ItemData itemData, int count)
     {
-        this.itemData = itemData;
-        txtItemName.text = this.itemData.itemName.ToString();
-        txtItemCount.text = count.ToString();
+        this.itemData = itemData;   // ItemDataSOスクリプタブルオブジェクトの情報をitemData変数に代入
+        txtItemName.text = this.itemData.itemName.ToString();　// 上で取得したItemDataSOスクリプタブルオブジェクトの情報を代入
+        txtItemCount.text = count.ToString();   // アイテムの総数　？
         imgItem.sprite = this.itemData.itemSprite;
     }
 
@@ -51,7 +51,7 @@ public class ItemButtonDetail : MonoBehaviour
     /// </summary>
     public void OnSelected()
     {
-        txtItemInfo.text = this.itemData.itemInfo;
+        txtItemInfo.text = this.itemData.itemInfo;　// アイテムの説明を表示
     }
 
     /// <summary>
@@ -59,6 +59,6 @@ public class ItemButtonDetail : MonoBehaviour
     /// </summary>
     public void OnDeselected()
     {
-        txtItemInfo.text = "";  // 説明文を空欄に
+        txtItemInfo.text = "";  // アイテムの説明を空欄にする
     }
 }

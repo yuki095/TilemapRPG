@@ -13,7 +13,9 @@ public class ItemButtonManager : MonoBehaviour
 
     private void Start()
     {
+        // アイテム画面が開かれた時の処理
         btnItemSelectWindow.onClick.AddListener(CreateItemButtonDetails);
+        // アイテム画面が閉じられた時の処理
         btnExitItemWindow.onClick.AddListener(DestroyItemButtonDetails);
     }
 
@@ -22,6 +24,7 @@ public class ItemButtonManager : MonoBehaviour
     /// </summary>
     public void CreateItemButtonDetails()
     {
+        Debug.Log("アイテム生成");
         DestroyItemButtonDetails();
 
         // 所持しているアイテム分だけインスタンスする
@@ -38,7 +41,7 @@ public class ItemButtonManager : MonoBehaviour
     {
         if (itemButtonDetailList.Count > 0)     // 所持数が0より大きい場合
         {
-            for (int i = 0; i < itemButtonDetailList.Count; i++)
+            for (int i = 0; i < itemButtonDetailList.Count; i++)　// 変数を＋１する
             {
                 Destroy(itemButtonDetailList[i].gameObject);
             }

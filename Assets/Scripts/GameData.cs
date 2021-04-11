@@ -61,7 +61,7 @@ public class GameData : MonoBehaviour
     }
 
     /// <summary>
-    /// ItemInventryDatasListの最大数を取得
+    /// ItemInventryDatasListの最大数を取得　（アイテムの所持数）
     /// </summary>
     /// <returns></returns>
     public int GetItemInventryListCount()
