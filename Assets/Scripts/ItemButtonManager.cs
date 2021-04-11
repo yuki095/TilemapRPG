@@ -10,6 +10,7 @@ public class ItemButtonManager : MonoBehaviour
     public Transform itemAreaTran;
     public Button btnItemSelectWindow;
     public Button btnExitItemWindow;
+    public InformationManager informationManager;
 
     private void Start()
     {
@@ -30,9 +31,12 @@ public class ItemButtonManager : MonoBehaviour
         // 所持しているアイテム分だけインスタンスする
         for (int i = 0; i < GameData.instance.GetItemInventryListCount(); i++)
         {
+            // アイテムのボタンを生成
             ItemButtonDetail itemButtonDetail = Instantiate(itemButtonDetailPrefab, itemAreaTran, false);
+            // 所持しているアイテムの通し番号を引数で指定して
             GameData.ItemInventryData itemInventryData = GameData.instance.GetItemInventryData(i);
-            itemButtonDetail.SetUpItemButtonDetail(DataBaseManager.instance.GetItemDataFromItemName(itemInventryData.itemName), itemInventryData.count);
+            // アイテムボタンの設定（第一引数でアイテムデータを取得、第二引数で所持数を取得）
+            itemButtonDetail.SetUpItemButtonDetail(DataBaseManager.instance.GetItemDataFromItemName(itemInventryData.itemName), itemInventryData.count, informationManager);
             itemButtonDetailList.Add(itemButtonDetail);
         }
     }

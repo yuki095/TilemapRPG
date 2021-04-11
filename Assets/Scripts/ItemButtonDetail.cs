@@ -23,17 +23,20 @@ public class ItemButtonDetail : MonoBehaviour
     [SerializeField]
     private ItemDataSO.ItemData itemData;
 
+    private InformationManager informationManager;
+
     /// <summary>
     /// ItemDataDetailの設定（外部のスクリプトから呼び出される前提のメソッド）
     /// </summary>
     /// <param name="itemData">アイテムのデータ</param>
     /// <param name="count">アイテムの所持数</param>
-    public void SetUpItemButtonDetail(ItemDataSO.ItemData itemData, int count)
+    public void SetUpItemButtonDetail(ItemDataSO.ItemData itemData, int count, InformationManager informationManager)
     {
         this.itemData = itemData;   // ItemDataSOスクリプタブルオブジェクトの情報をitemData変数に代入
-        txtItemName.text = this.itemData.itemName.ToString();　// 上で取得したItemDataSOスクリプタブルオブジェクトの情報を代入
+        // txtItemName.text = this.itemData.itemName.ToString();　// 上で取得したItemDataSOスクリプタブルオブジェクトの情報を代入
         txtItemCount.text = count.ToString();   // アイテムの総数　？
         imgItem.sprite = this.itemData.itemSprite;
+        this.informationManager = informationManager;
     }
 
     /// <summary>
@@ -51,7 +54,8 @@ public class ItemButtonDetail : MonoBehaviour
     /// </summary>
     public void OnSelected()
     {
-        txtItemInfo.text = this.itemData.itemInfo;　// アイテムの説明を表示
+        // txtItemInfo.text = this.itemData.itemInfo;　// アイテムの説明を表示
+        informationManager.DesplayItemInfos(itemData.itemInfo, itemData.itemName.ToString());
     }
 
     /// <summary>
