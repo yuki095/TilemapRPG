@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using OneLine;  // 追加したアセット
 
 [CreateAssetMenu(fileName = "ItemDataSO", menuName = "Create ItemDataSO")]
 public class ItemDataSO : ScriptableObject
@@ -21,6 +22,7 @@ public class ItemDataSO : ScriptableObject
         // TODO データが増えたらここに追加
     }
 
+    [OneLineWithHeader]
     // リストの初期化
     public List<ItemData> itemDataList = new List<ItemData>();
 }

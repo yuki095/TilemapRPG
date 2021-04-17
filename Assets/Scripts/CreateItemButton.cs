@@ -22,8 +22,10 @@ public class CreateItemButton : MonoBehaviour
 		{
 			item[i] = GameObject.Instantiate(itemPrefab) as GameObject;
 			item[i].name = "Item" + i;
+
 			// アイテムボタンの親要素をこのスクリプトが設定されているゲームオブジェクトにする
 			item[i].transform.SetParent(transform);
+
 			// アイテムを持っているかどうか
 			if (statusWindowStatus.GetItemFlag(i))
 			{
@@ -36,6 +38,7 @@ public class CreateItemButton : MonoBehaviour
 				item[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
 				item[i].transform.GetChild(0).GetComponent<Button>().interactable = false;
 			}
+
 			// ボタンにユニークな番号を設定（アイテムデータベース番号と対応）
 			item[i].transform.GetChild(0).GetComponent<ItemButton>().SetItemNum(i);
 		}

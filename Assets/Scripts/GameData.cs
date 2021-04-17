@@ -19,6 +19,19 @@ public class GameData : MonoBehaviour
         public ItemName itemName;   // アイテムの名前
         public int count;           // 所持数
         public int number;          // 所持している通し番号
+
+        /// <summary>
+        /// ItemInventryDataクラスのコンストラクタ
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <param name="num"></param>
+        public ItemInventryData(ItemInventryData name, int value, int num)
+        {
+            itemName = name;
+            count = value;
+            number = num;
+        }
     }
 
     [Header("所持アイテムのリスト")]
@@ -77,5 +90,66 @@ public class GameData : MonoBehaviour
     public ItemInventryData GetItemInventryData(int no)
     {
         return itemInventryDatasList[no];
+    }
+
+    /// <summary>
+    /// 所持アイテムのセーブ
+    /// </summary>
+    public void SaveItemInventryDatas()
+    {
+        // 所持しているアイテムの数だけ処理を行う
+        for (int i = 0; i < itemInventryDatasList.Count; i++)
+        {
+            // 所持しているアイテムの情報を１つの文字列としてセーブするための準備を行う
+            PlayerPrefs.SetString(itemInventryDatasList[i].itemName.ToString(), itemInventryDatasList[i].itemName.ToString() + "," + itemInventryDatasList[i].count.ToString() + "," + i.ToString());
+        }
+
+        // セーブ（Set〜メソッドで準備された情報をセーブする）
+        PlayerPrefs.Save();
+
+        Debug.Log("ItemInventry セーブ完了");
+    }
+
+    /// <summary>
+    /// 所持アイテムのロード
+    /// </summary>
+    public void LoadItemInventryDatas()
+    {
+        // アイテムデータ分だけ繰り返す
+        for (int i = 0; i < DataBaseManager.instance.GetItemDataSoCount(); i++)
+        {
+            // ItemNameでセーブしてあるデータがPlayerPrefs内にあるか
+            if (!PlayerPrefs.HasKey(DataBaseManager.instance.GetItemDataFromItemNo(i).itemName.ToString()))
+            {
+                // セーブデータがなければここで処理を終了し、次のセーブデータを確認する処理へ映る
+                continue;
+            }
+
+            // セーブされているデータを読み込んで配列に代入
+            string[] stringArray = PlayerPrefs.GetString(DataBaseManager.instance.GetItemDataFromItemNo(i).itemName.ToString()).Split('.');
+
+            // セーブデータからアイテムのデータをコンストラクタ・メソッドを利用して復元
+            itemInventryDatasList.Add(new ItemInventryData((ItemName)Enum.Parse(typeof(ItemName),stringArray[0]),int.Parse(stringArray[1]),int.Parse(stringArray[2])));
+        }
+        // 以前所持していた番号順で所持アイテムの並びをソート
+        itemInventryDatasList = itemInventryDatasList.OrderBy(x => x.number).ToList();
+
+        Debug.Log("ItemTventry ロード完了");
+    }
+
+    // デバッグ用
+    private void Update()
+    {
+        // デバッグ用セーブ
+        if (Input.GetKeyDown(KeyCode.K) && isDebug)
+        {
+            SaveItemInventryDatas();
+        }
+
+        // デバッグ用ロード
+        if (Input.GetKeyDown(KeyCode.L) && isDebug)
+        {
+            LoadItemInventryDatas();
+        }
     }
 }

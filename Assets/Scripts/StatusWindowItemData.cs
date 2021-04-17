@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StatusWindowItemData : Object
 {
-    private Sprite itemSprite;                          // アイテムのImage画像ß
+    private Sprite itemSprite;                          // アイテムのImage画像
     private string itemName;                            // アイテムの名前
     private StatusWindowItemDataBase.Item itemType;     // アイテムのタイプ
     private string itemInformation;                     // アイテムの情報
