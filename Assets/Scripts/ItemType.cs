@@ -1,7 +1,7 @@
 ﻿public enum ItemType
 {
     Equip,          // 装備
-    Sele,           // 売却専用品
+    Sale,           // 売却専用品
     Valuables,      // 貴重品
     Use,            // 使用品
 

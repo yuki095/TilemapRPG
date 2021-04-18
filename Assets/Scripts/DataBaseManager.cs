@@ -102,7 +102,7 @@ public class DataBaseManager : MonoBehaviour
     /// <returns></returns>
     public ItemDataSO.ItemData GetItemDataFromItemName (ItemName itemName)
     {
-        // 条件に合った先頭の値を取得（上記のforeach文と同じ処理）
+        // 条件に合致した最初の値を取得（上記のforeach文と同じ処理）
         return itemDataSO.itemDataList.FirstOrDefault(x => x.itemName == itemName);
     }
 
@@ -148,13 +148,14 @@ public class DataBaseManager : MonoBehaviour
 
     private void CreateItemNamesListsFromItemData()
     {
-        // ItemName型のenumに登録されている列挙子をすべて取り出して文字列の配列にして取得し、values変数に代入
+        // ItemName型のenumに登録されている列挙子（薬草とか）をすべて取り出して文字列の配列にして取得し、values変数に代入
         string[] values = Enum.GetNames(typeof(ItemName));
 
         // ItemDataSOスクリプタブル・オブジェクト内のItemDataの情報を１つずつ順番に取り出して、itemData変数に代入
         foreach (ItemDataSO.ItemData itemData in itemDataSO.itemDataList)
         {
             // values配列変数の中を先頭から順番に検索し、現在取り出しているitemData変数のitemNameと合致した値があれば
+            // nullや、空の文字列じゃなければ
             if (!string.IsNullOrEmpty(values.FirstOrDefault(x => x == itemData.itemName.ToString())))
             {
                 // 最初に合致した値を文字列として代入

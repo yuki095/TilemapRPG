@@ -26,7 +26,7 @@ public class GameData : MonoBehaviour
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <param name="num"></param>
-        public ItemInventryData(ItemInventryData name, int value, int num)
+        public ItemInventryData(ItemName name, int value, int num)
         {
             itemName = name;
             count = value;
@@ -98,7 +98,7 @@ public class GameData : MonoBehaviour
     public void SaveItemInventryDatas()
     {
         // 所持しているアイテムの数だけ処理を行う
-        // 所持数が0より大きい場合、iの値を1ずつ増やす＝アイテム1個ごとに下記の情報をセーブする）
+        // 所持数が0より大きい場合、iの値を1ずつ増やす＝アイテム1種類ごとに下記の情報をセーブする
         for (int i = 0; i < itemInventryDatasList.Count; i++)
         {
             // 所持しているアイテムの情報（名前、所持数、通し番号）を１つの文字列としてセーブするための準備
@@ -132,10 +132,10 @@ public class GameData : MonoBehaviour
             // セーブデータからアイテムのデータをコンストラクタ・メソッドを利用して復元
             itemInventryDatasList.Add(new ItemInventryData((ItemName)Enum.Parse(typeof(ItemName),stringArray[0]),int.Parse(stringArray[1]),int.Parse(stringArray[2])));
         }
-        // 以前所持していた番号順で所持アイテムの並びをソート
+        // 以前所持していた番号順（小さい数から）で所持アイテムの並びをソート
         itemInventryDatasList = itemInventryDatasList.OrderBy(x => x.number).ToList();
 
-        Debug.Log("ItemTventry ロード完了");
+        Debug.Log("ItemInventry ロード完了");
     }
 
     // デバッグ用
