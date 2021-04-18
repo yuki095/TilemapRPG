@@ -98,13 +98,14 @@ public class GameData : MonoBehaviour
     public void SaveItemInventryDatas()
     {
         // 所持しているアイテムの数だけ処理を行う
+        // 所持数が0より大きい場合、iの値を1ずつ増やす＝アイテム1個ごとに下記の情報をセーブする）
         for (int i = 0; i < itemInventryDatasList.Count; i++)
         {
-            // 所持しているアイテムの情報を１つの文字列としてセーブするための準備を行う
+            // 所持しているアイテムの情報（名前、所持数、通し番号）を１つの文字列としてセーブするための準備
             PlayerPrefs.SetString(itemInventryDatasList[i].itemName.ToString(), itemInventryDatasList[i].itemName.ToString() + "," + itemInventryDatasList[i].count.ToString() + "," + i.ToString());
         }
 
-        // セーブ（Set〜メソッドで準備された情報をセーブする）
+        // セーブ（SetStringメソッドで準備された情報をセーブする）
         PlayerPrefs.Save();
 
         Debug.Log("ItemInventry セーブ完了");
@@ -115,18 +116,18 @@ public class GameData : MonoBehaviour
     /// </summary>
     public void LoadItemInventryDatas()
     {
-        // アイテムデータ分だけ繰り返す
+        // アイテムの所持数分だけ繰り返す
         for (int i = 0; i < DataBaseManager.instance.GetItemDataSoCount(); i++)
         {
-            // ItemNameでセーブしてあるデータがPlayerPrefs内にあるか
+            // ItemNameでセーブしてあるデータがPlayerPrefs内にない場合（HasKeyメソッドで判定）
             if (!PlayerPrefs.HasKey(DataBaseManager.instance.GetItemDataFromItemNo(i).itemName.ToString()))
             {
-                // セーブデータがなければここで処理を終了し、次のセーブデータを確認する処理へ映る
+                // ここで処理を終了し、次のセーブデータを確認する処理へ映る
                 continue;
             }
 
-            // セーブされているデータを読み込んで配列に代入
-            string[] stringArray = PlayerPrefs.GetString(DataBaseManager.instance.GetItemDataFromItemNo(i).itemName.ToString()).Split('.');
+            // セーブされているデータを読み込んで配列に代入（Split＝,で情報を区切る）
+            string[] stringArray = PlayerPrefs.GetString(DataBaseManager.instance.GetItemDataFromItemNo(i).itemName.ToString()).Split(',');
 
             // セーブデータからアイテムのデータをコンストラクタ・メソッドを利用して復元
             itemInventryDatasList.Add(new ItemInventryData((ItemName)Enum.Parse(typeof(ItemName),stringArray[0]),int.Parse(stringArray[1]),int.Parse(stringArray[2])));

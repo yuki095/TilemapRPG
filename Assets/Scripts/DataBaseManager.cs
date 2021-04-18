@@ -131,7 +131,7 @@ public class DataBaseManager : MonoBehaviour
                     equipItemDataList.Add(itemData);
                     break;
 
-                case ItemType.Sele:
+                case ItemType.Sale:
                     saleItemDataList.Add(itemData);
                     break;
 
