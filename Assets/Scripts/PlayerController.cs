@@ -22,8 +22,27 @@ public class PlayerController : MonoBehaviour
 
     private EncountManager encountManager;   // EncountManagerクラスの情報を代入するための変数
 
+
     [SerializeField]
-    private GameObject propertyWindow;
+    private OperationStatusWindow operationStatusWindow = null;  // アイテムインベントリーウィンドウの参照用
+
+    private string[] actionlayerMasks = new string[2] { "NPC", "TresureBox" };　// LayerMaskの設定
+
+    // isTalkingのプロパティ（private修飾子のまま外部クラスから参照できる）
+    public bool IsTalking
+    {
+        set
+        {
+            isTalking = value; // TrueかFalseを代入（外部から書き換える値）
+        }
+        get
+        {
+            return isTalking;　// 結果を返す（外部から参照するための値）
+        }
+    }
+
+    // [SerializeField]
+    // private GameObject propertyWindow;
 
     void Start()
     {
@@ -48,16 +67,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (operationStatusWindow.propertyWindow.activeSelf) // ステータス画面が開いている場合
+        {
+            return;       // ここで処理を終わらせる（移動キーの入力を受け付けない）
+        }
+
         Action();  　// アクション
 
         if (isTalking)     // 会話中の場合は 
         {
             return;        // ここで処理を終わらせる（移動キーの入力を受け付けない）
-        }
-
-        if (propertyWindow.activeSelf == true) // ステータス画面が開いている場合
-        {
-            return;
         }
 
         // InputManagerに登録してあるキーが入力されたら、x／y方向の入力値として代入
@@ -69,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (propertyWindow.activeSelf == true)
+        if (operationStatusWindow.propertyWindow.activeSelf) // ステータス画面が開いている場合
         {
             rb.velocity = Vector2.zero;   // 速度を０にする
             return;
@@ -127,9 +146,9 @@ public class PlayerController : MonoBehaviour
         {
             // プレイヤーの位置を起点として【rb.position】
             // プレイヤーの向いている方向【lookDirection】に1.0f分だけRayを発射
-            // NPCレイヤーを持つオブジェクトに接触するか判定
+            // actionLayerMasks変数に代入されているレイヤーのオブジェクトに接触するか判定
             // その情報をhit変数に代入する
-            RaycastHit2D hit = Physics2D.Raycast(rb.position, lookDirection, 1.0f, LayerMask.GetMask("NPC"));
+            RaycastHit2D hit = Physics2D.Raycast(rb.position, lookDirection, 1.0f, LayerMask.GetMask(actionlayerMasks));
 
             // SceneビューにてRayの可視化
             Debug.DrawRay(rb.position, lookDirection, Color.blue, 1.0f);
@@ -141,7 +160,7 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.TryGetComponent(out NonPlayerCharacter npc))
                 {
                     // 取得したNonPlayerCharacterクラスをもつオブジェクトと会話中ではない場合
-                    if (!npc.isTalking)  //!は否定？
+                    if (!npc.isTalking)  //!は否定
                     {
                         npc.PlayTalk(transform.position);   // NPCとの会話イベント発生
                         isTalking = true;                   // プレイヤーを会話中にする
@@ -151,6 +170,25 @@ public class PlayerController : MonoBehaviour
                     {
                         npc.StopTalk();         // NPCとの会話イベント終了
                         isTalking = false;
+                    }
+                }
+
+                // そのオブジェクトにアタッチされているTreasureBoxクラスが取得できた場合
+                else if (hit.collider.TryGetComponent(out TreasureBox treasureBox))
+                {
+                    Debug.Log("通過");
+
+                    // 宝箱をまだ開けたことがない場合（探索済みでない場合）
+                    if (!treasureBox.isOpen)
+                    {
+                        // 宝箱イベント発生（会話ウィンドウを開く）
+                        treasureBox.OpenTresureBox(transform.position, this);　//
+                        isTalking = true;　// プレイヤーを会話中にする
+                    }
+                    else　// 宝箱をすでに開けたことがある場合（探索済みの場合）
+                    {
+                        treasureBox.CloseTreasureBox();　// 宝箱イベント終了（会話ウィンドウを閉じる）
+                        isTalking = false;　// プレイヤーの会話状態を解除
                     }
                 }
             }

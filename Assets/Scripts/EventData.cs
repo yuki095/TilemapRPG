@@ -21,5 +21,8 @@ public enum EventType
 
     public Sprite eventSprite;      // イベントの画像データ
 
+    public ItemName eventItemName; // イベントで獲得できるアイテム
+    public int eventItemCount;     // イベントで獲得できるアイテムの個数
+
     // TODO　その他
 }

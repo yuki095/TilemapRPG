@@ -45,12 +45,6 @@ public class DialogController : MonoBehaviour
     /// </summary>
     public void DisplayDialog(EventData eventData)
     {
-        //    if(this.eventData == null)
-        //    {
-        //        Debug.Log("通過");
-        //        this.eventData = eventData;
-        //    }
-
         this.eventData = eventData;
 
         canvasGroup.DOFade(1.0f, 0.5f);      // フェードイン　0.5秒かけて透明度を1に
@@ -59,7 +53,7 @@ public class DialogController : MonoBehaviour
 
         txtDialog.DOText(this.eventData.dialog, 1.0f).SetEase(Ease.Linear);  // 1文字ずつ表示する（表示間隔を一定にする）
 
-        // TODO 画像データがある場合は、Image型の変数にeventData.eventSpriteを代入
+        // TODO 画像データ　Image型の変数にeventData.eventSpriteを代入
     }
 
     /// <summary>
@@ -69,5 +63,43 @@ public class DialogController : MonoBehaviour
     {
         canvasGroup.DOFade(0.0f, 0.5f); 　　　// フェードアウト　0.5秒かけて透明度を0に
         txtDialog.text = "";                 // 空欄にする
+    }
+
+    /// <summary>
+    /// 探索対象を獲得する
+    /// </summary>
+    /// <param name="eventData"></param>
+    /// <param name="treasureBox"></param>
+    /// <returns></returns>
+    public void DisplaySearchDialog(EventData eventData, TreasureBox treasureBox)
+    {
+        // 会話ウインドウを表示
+        canvasGroup.DOFade(1.0f, 0.5f);
+
+        // タイトルに探索物の名称を表示
+        txtTitleName.text = eventData.title;
+
+        // アイテム獲得
+        GetEventItems(eventData);
+
+        // 獲得した宝箱の番号を GameData に追加
+        GameData.instance.AddSearchEventNum(treasureBox.treasureEventNo);
+
+        // TODO 獲得した宝箱の番号をセーブ
+        // TODO 所持しているアイテムのセーブ
+        // TODO お金や経験値のセーブ
+    }
+
+    /// <summary>
+    /// アイテム獲得
+    /// </summary>
+    /// <param name="eventData"></param>
+    private void GetEventItems(EventData eventData)
+    {
+        // 獲得したアイテムの名前と数を表示
+        txtDialog.text = eventData.eventItemName.ToString() + " × " + eventData.eventItemCount + " 獲得";
+
+        // GameDataにデータを登録（アイテム獲得の実処理）
+        GameData.instance.AddItemInventryData(eventData.eventItemName, eventData.eventItemCount);
     }
 }

@@ -5,14 +5,13 @@ using UnityEngine.EventSystems;
 
 public class OperationStatusWindow : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject propertyWindow;
+
+    public GameObject propertyWindow;
 
     // ステータスウィンドウの全部の画面
-    [SerializeField]
-    private GameObject[] windowLists;
+    public GameObject[] windowLists;
 
-    private void Start()
+    public void Start()
     {
        propertyWindow.SetActive(false);
     }

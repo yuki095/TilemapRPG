@@ -37,6 +37,9 @@ public class GameData : MonoBehaviour
     [Header("所持アイテムのリスト")]
     public List<ItemInventryData> itemInventryDatasList = new List<ItemInventryData>();
 
+    [Header("獲得済みの探索イベントの番号")]
+    public List<int> getSearchEventNumsList = new List<int>();
+
     void Awake()
     {
         if (instance == null)
@@ -151,6 +154,95 @@ public class GameData : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L) && isDebug)
         {
             LoadItemInventryDatas();
+        }
+
+        // デバッグ用ロード
+        if (Input.GetKeyDown(KeyCode.I) && isDebug)
+        {
+            // 追加・加算したいアイテムの名前と数を引数に指定してメソッドを呼び出す
+            AddItemInventryData(ItemName.ひのきの棒, 1);    // 引数を変更することで追加・加算するアイテムを指定
+        }
+
+        // デバッグ用　所持しているアイテムの減算
+        if (Input.GetKeyDown(KeyCode.O) && isDebug)
+        {
+            // 減算したいアイテムの名前と数を引数に指定してメソッドを呼び出す（除算後の所持数が0以下になったら削除）
+            RemoveItemInventryData(ItemName.ひのきの棒, 1);    // 引数を変更することで減算するアイテムを指定
+        }
+    }
+
+    /// <summary>
+    /// ItemInvetryData を追加・加算
+    /// </summary>
+    /// <param name="itemName"></param>
+    /// <param name="amount"></param>
+    public void AddItemInventryData(ItemName itemName, int amount = 1)
+    {
+        // List の要素を１つずつ確認して、すでに所持しているアイテムかどうか確認
+        foreach (ItemInventryData itemInventryData in itemInventryDatasList)
+        {
+            // 所持しているアイテムの場合
+            if (itemInventryData.itemName == itemName)
+            {
+                // 所持数を加算
+                itemInventryData.count += amount;
+
+                Debug.Log("リストに対象アイテムを加算 : " + itemName + " / 合計 : " + itemInventryData.count + " 個");
+
+                // 処理を終了
+                return;
+            }
+        }
+        // 所持していないアイテムの場合、新しく所持アイテムとして追加
+        itemInventryDatasList.Add(new ItemInventryData(itemName, amount, itemInventryDatasList.Count));
+
+        Debug.Log("リストに対象アイテムを新規追加 : " + itemName + " / " + amount + " 個");
+    }
+
+    /// <summary>
+    /// ItemInventryData を減算、0以下になったら削除
+    /// </summary>
+    /// <param name="itemName"></param>
+    /// <param name="amount"></param>
+    public void RemoveItemInventryData(ItemName itemName, int amount = 1)
+    {
+        // List の要素を１つずつ確認して、すでに所持しているアイテムかどうか確認
+        foreach (ItemInventryData itemInventryData in itemInventryDatasList)
+        {
+            // 所持しているアイテムの場合
+            if (itemInventryData.itemName == itemName)
+            {
+                // 所持数を減算
+                itemInventryData.count -= amount;
+
+                Debug.Log("リストに対象アイテムを減算 : " + itemName + " / 合計 : " + itemInventryData.count + " 個");
+
+                // 所持数が0以下になったら
+                if (itemInventryData.count <= 0)
+                {
+                    // 所持アイテムから削除する
+                    itemInventryDatasList.Remove(itemInventryData);
+
+                    Debug.Log("リストから対象アイテムを削除 : " + itemName);
+                }
+                return;
+            }
+        }
+
+        Debug.Log("リストに対象アイテムなし");
+    }
+
+    /// <summary>
+    /// 獲得した探索イベントの番号を保持
+    /// </summary>
+    public void AddSearchEventNum(int searchEventNum)
+    {
+        // 引数に指定した探索イベントの番号が、getSearchEventNumsList内に存在しているかどうかチェック（重複登録を防ぐ）
+        // 存在しない場合ß
+        if (!getSearchEventNumsList.Contains(searchEventNum))
+        {
+            // 獲得した探索イベントの番号を追加
+            getSearchEventNumsList.Add(searchEventNum);
         }
     }
 }
