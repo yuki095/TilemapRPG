@@ -40,6 +40,7 @@ public class GameData : MonoBehaviour
     [Header("獲得済みの探索イベントの番号")]
     public List<int> getSearchEventNumsList = new List<int>();
 
+    private const string getSearchEventNumKey = "getSearchEventNumkey_";
 
     /// <summary>
     /// 会話ウインドウの種類
@@ -257,6 +258,48 @@ public class GameData : MonoBehaviour
         {
             // 獲得した探索イベントの番号を追加
             getSearchEventNumsList.Add(searchEventNum);
+        }
+    }
+
+    /// <summary>
+    /// 獲得しているすべての探索イベントの番号をセーブ
+    /// </summary>
+    public void SaveAllGetSearchEventNums()
+    {
+        for (int i = 0; i < getSearchEventNumsList.Count; i++)
+        {
+            PlayerPrefs.SetInt(getSearchEventNumKey + getSearchEventNumsList[i].ToString(), getSearchEventNumsList[i]);
+        }
+
+        PlayerPrefs.Save();
+
+        Debug.Log("獲得済のすべての探索イベント セーブ完了");
+    }
+
+    /// <summary>
+    /// 獲得した探索イベントの番号をセーブ
+    /// </summary>
+    /// <param name="searchEventNum"></param>
+    public void SaveSearchEventNum(int searchEventNum)
+    {
+        PlayerPrefs.SetInt(getSearchEventNumKey + searchEventNum.ToString(), searchEventNum);
+        PlayerPrefs.Save();
+
+        Debug.Log("獲得済の探索イベントの番号 : " + searchEventNum + " : セーブ完了");
+    }
+
+    /// <summary>
+    /// 獲得している探索イベントの番号をロード
+    /// </summary>
+    public void LoadGetSearchEventNums()
+    {
+        for (int i = 0; i < DataBaseManager.instance.GetEventDataSOCount(); i++)
+        {
+            int value = PlayerPrefs.GetInt(getSearchEventNumKey + i.ToString(), -1);
+            if (value != -1)
+            {
+                getSearchEventNumsList.Add(value);
+            }
         }
     }
 }

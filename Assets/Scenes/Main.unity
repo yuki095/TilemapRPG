@@ -281,6 +281,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96536866}
   m_CullTransparentMesh: 0
+--- !u!1 &113944544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 113944546}
+  - component: {fileID: 113944545}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &113944545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113944544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a3ca281ecda4f69b7cde13f95adbdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treasureBoxesList:
+  - {fileID: 127304072}
+  nonPlayerCharactersList:
+  - {fileID: 1789430726}
+  - {fileID: 1271441945}
+  - {fileID: 637412645}
+  uiManager: {fileID: 1764764419}
+--- !u!4 &113944546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113944544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &127304068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,7 +1463,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2821990418487203716, guid: ac97a99eebe25498e89dba1d37177bbc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2821990418487203716, guid: ac97a99eebe25498e89dba1d37177bbc, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2149,10 +2199,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 100
+  far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2176,7 +2226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.88786, y: -0.8474683, z: -8.736826}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2224,6 +2274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8393d6c33cf24a1ab74727e3f34b520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemLists:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &525492483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2700,7 +2755,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTalking: 0
-  isFixedTalkWindowUsing: 0
   npcTalkEventNo: 2
   eventData:
     eventType: 0
@@ -6513,7 +6567,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTalking: 0
-  isFixedTalkWindowUsing: 1
   npcTalkEventNo: 1
   eventData:
     eventType: 0
@@ -16336,7 +16389,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTalking: 0
-  isFixedTalkWindowUsing: 0
   npcTalkEventNo: 0
   eventData:
     eventType: 0

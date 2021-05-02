@@ -15,11 +15,6 @@ public class DialogController : MonoBehaviour
     [SerializeField]
     private CanvasGroup canvasGroup = null;
 
-    // [SerializeField]
-    // private string titleName = "dog";
-    // [SerializeField]
-    // private string dialog = "ワンワン！";
-
     [SerializeField]
     private EventData eventData;   // NonPlayerCharacterスクリプトから届くEventDataの情報を代入するための変数
 
@@ -85,8 +80,12 @@ public class DialogController : MonoBehaviour
         // 獲得した宝箱の番号を GameData に追加
         GameData.instance.AddSearchEventNum(treasureBox.treasureEventNo);
 
-        // TODO 獲得した宝箱の番号をセーブ
-        // TODO 所持しているアイテムのセーブ
+        // 獲得した宝箱の番号をセーブ
+        GameData.instance.SaveSearchEventNum(treasureBox.treasureEventNo);
+
+        // 所持しているアイテムのセーブ
+        GameData.instance.SaveItemInventryDatas();
+
         // TODO お金や経験値のセーブ
     }
 

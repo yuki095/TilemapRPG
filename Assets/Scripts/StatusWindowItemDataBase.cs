@@ -11,6 +11,7 @@ public class StatusWindowItemDataBase : MonoBehaviour
         UseItem
     };
 
+    [SerializeField]
     private StatusWindowItemData[] itemLists = new StatusWindowItemData[4];
 
     private void Awake()

@@ -45,6 +45,6 @@ MonoBehaviour:
     no: 1
     title: "\u5B9D\u7BB1"
     dialog: "\u30D6\u30EB\u30FC\u30EA\u30DC\u30F3\u3000\xD7\uFF11"
-    eventSprite: {fileID: 0}
+    eventSprite: {fileID: -4249539952858950829, guid: 9a8ec9c2dd63e475a9e3689e4c1e5e0a, type: 3}
     eventItemName: 4
     eventItemCount: 0

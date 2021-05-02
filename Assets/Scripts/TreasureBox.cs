@@ -16,6 +16,11 @@ public class TreasureBox : MonoBehaviour
 
     private EventData.EventType eventType = EventData.EventType.Search;
 
+    [Header("TalkWindowの使用許可")]
+    private bool isFixedTalkWindowUsing;   // インスペクターで確認した後はprivate修飾子に変更してもよい
+
+    private UIManager uiManager;　　　　　 // UIManager スクリプトの情報を代入するための変数
+
     [Header("宝箱イベントの通し番号")]
     public int treasureEventNo;
 
@@ -26,10 +31,10 @@ public class TreasureBox : MonoBehaviour
 
     private PlayerController playerController;
 
-    private void Start()
-    {
-        SetUpTresureBox();
-    }
+   // private void Start()
+   // {
+   //     SetUpTresureBox();    // 外部クラスより呼び出すのでコメントアウト
+   // }
 
     /// <summary>
     /// 探索イベントの準備
@@ -61,7 +66,7 @@ public class TreasureBox : MonoBehaviour
             this.playerController = playerController;
         }
 
-        isOpen = true;
+        SwitchStateTreasureBox(true);
 
         if (playerPos.y < transform.position.y) // プレイヤーの位置が宝箱より下の場合
         {
@@ -72,10 +77,18 @@ public class TreasureBox : MonoBehaviour
             dialogController.transform.position = defaultPos;
         }
 
-        // Debug.Log("探索イベント用の会話ウインドウを開く");
+        // 設定されている会話ウインドウの種類に合わせて、開く会話ウインドウを分岐させる
+        if (isFixedTalkWindowUsing)
+        {
+            uiManager.OpenTalkWindow(eventData);　// 固定型の会話ウインドウを表示する
+        }
+        else
+        {
+            dialogController.DisplayDialog(eventData); // 稼働型の会話イベントのウインドウを表示する
+        }
 
         // 探索イベント用の会話ウィンドウを開く
-        dialogController.DisplaySearchDialog(eventData, this);
+        // dialogController.DisplaySearchDialog(eventData, this);
     }
 
     /// <summary>
@@ -85,9 +98,55 @@ public class TreasureBox : MonoBehaviour
     {
         playerController.IsTalking = false;
 
-        // Debug.Log("探索イベント用の会話ウインドウを閉じる");
+        // 設定されている会話ウインドウの種類に合わせて、会話イベントのウィンドウを閉じる
+        if (isFixedTalkWindowUsing)
+        {
+            uiManager.CloseTalkWindow();
+        }
+        else
+        {
+            dialogController.HideDialog();
+        }
 
         // 探索イベント用の会話ウィンドウを閉じる
-        dialogController.HideDialog();
+        // dialogController.HideDialog();
+    }
+
+    /// <summary>
+    /// 探索イベントの通し番号の取得
+    /// </summary>
+    /// <returns></returns>
+    public int GetTresureEventNum()
+    {
+        return treasureEventNo;
+    }
+
+    /// <summary>
+    /// 探索状態の切り替え
+    /// </summary>
+    /// <param name="isSwitch"></param>
+    public void SwitchStateTreasureBox(bool isSwitch)
+    {
+        isOpen = isSwitch;
+
+        if (isOpen)
+        {
+            // 宝箱の画像を開封済にする
+            spriteRenderer.sprite = eventData.eventSprite;
+
+            // 宝箱自体を非表示にする場合
+            // this.gameObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// 固定型会話ウインドウを利用するための設定
+    /// </summary>
+    /// <param name="uiManager"></param>
+    public void SetUpFixedTalkWindow(UIManager uiManager)
+    {
+        this.uiManager = uiManager;
+
+        isFixedTalkWindowUsing = true;
     }
 }

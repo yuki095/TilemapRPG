@@ -8,7 +8,7 @@ public class NonPlayerCharacter : MonoBehaviour
     public bool isTalking;      // Trueの場合は会話イベント中
 
     [Header("TalkWindowの使用許可")]
-    public bool isFixedTalkWindowUsing;   // インスペクターで確認した後はprivate修飾子に変更してもよい
+    private bool isFixedTalkWindowUsing;   // インスペクターで確認した後はprivate修飾子に変更してもよい
 
     private UIManager uiManager;　　　　　 // UIManager スクリプトの情報を代入するための変数
 
@@ -75,10 +75,6 @@ public void PlayTalk(Vector3 playerPos)
         {            
             dialogController.DisplayDialog(eventData); // 稼働型の会話イベントのウインドウを表示する
         }
-
-        // 会話イベントのウィンドウを表示
-        // dialogController.DisplayDialog(eventData);
-
     }
 
     /// <summary>
@@ -98,9 +94,6 @@ public void PlayTalk(Vector3 playerPos)
         {
             dialogController.HideDialog();
         }
-
-        // 会話イベントのウィンドウを閉じる
-        // dialogController.HideDialog();
     }
 
     /// <summary>

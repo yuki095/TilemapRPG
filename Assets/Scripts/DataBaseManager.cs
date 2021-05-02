@@ -179,8 +179,15 @@ public class DataBaseManager : MonoBehaviour
                         break;
                 }
             }
-
         }
     }
 
+    /// <summary>
+    /// EventData の最大要素数を取得
+    /// </summary>
+    /// <returns></returns>
+    public int GetEventDataSOCount()
+    {
+        return eventDataSO.eventDatasList.Count;
+    }
 }
