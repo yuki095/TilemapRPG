@@ -55,19 +55,19 @@ public class DataBaseManager : MonoBehaviour
     }
 
     /// <summary>
-    /// NPC用のデータからEventDataを取得
+    /// EventDataを取得
     /// </summary>
-    /// <param name="npcEventNo"></param>
+    /// <param name="searchEventNo"></param>
     /// <returns></returns>
-    public EventData GetEventDataFromNPCEvent(int npcEventNo)
+    public EventData GetEventDataFromEvent(int searchEventNo, EventData.EventType searchEventType)
     {
         // EventDataSOスクリプタブル・オブジェクトのeventDatasListの中身（EventData）を
         // 1つずつ順番に取り出して、eventData変数に代入
         foreach (EventData eventData in eventDataSO.eventDatasList)
         {
             Debug.Log(eventData.no);
-            // eventDataの情報を判定し、EventTypeがTalkかつ、引数で取得しているnpcEventNoと同じ場合
-            if (eventData.eventType == EventData.EventType.Talk && eventData.no == npcEventNo)
+            // eventDataの情報を判定
+            if (eventData.eventType == searchEventType && eventData.no == searchEventNo)
             {
                 // 該当するEventDataであると判定し、その情報を返す
                 return eventData;

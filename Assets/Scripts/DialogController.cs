@@ -31,7 +31,7 @@ public class DialogController : MonoBehaviour
     /// <summary>
     /// ダイアログの設定
     /// </summary>
-    private void SetUpDialog()
+    public void SetUpDialog()
     {
         canvasGroup.alpha = 0.0f;           // 透明度を0にする
 

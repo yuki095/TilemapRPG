@@ -40,6 +40,19 @@ public class GameData : MonoBehaviour
     [Header("獲得済みの探索イベントの番号")]
     public List<int> getSearchEventNumsList = new List<int>();
 
+
+    /// <summary>
+    /// 会話ウインドウの種類
+    /// </summary>
+    public enum TalkWindowType
+    {
+        Fixed,   // 固定型
+        Movable  // 稼働型
+    }
+
+    [Header("会話ウインドウの種類を設定")]
+    public TalkWindowType useTalkWindowType;
+
     void Awake()
     {
         if (instance == null)
@@ -52,6 +65,7 @@ public class GameData : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     /// <summary>
     /// エンカウント時のプレイヤー位置と向きの情報を保持
     /// </summary>
@@ -206,7 +220,7 @@ public class GameData : MonoBehaviour
     /// <param name="amount"></param>
     public void RemoveItemInventryData(ItemName itemName, int amount = 1)
     {
-        // List の要素を１つずつ確認して、すでに所持しているアイテムかどうか確認
+        // Listの要素を１つずつ確認して、すでに所持しているアイテムかどうか確認
         foreach (ItemInventryData itemInventryData in itemInventryDatasList)
         {
             // 所持しているアイテムの場合
@@ -238,7 +252,7 @@ public class GameData : MonoBehaviour
     public void AddSearchEventNum(int searchEventNum)
     {
         // 引数に指定した探索イベントの番号が、getSearchEventNumsList内に存在しているかどうかチェック（重複登録を防ぐ）
-        // 存在しない場合ß
+        // 存在しない場合
         if (!getSearchEventNumsList.Contains(searchEventNum))
         {
             // 獲得した探索イベントの番号を追加

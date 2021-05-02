@@ -7,6 +7,12 @@ public class NonPlayerCharacter : MonoBehaviour
     [Header("会話イベント判定用")]
     public bool isTalking;      // Trueの場合は会話イベント中
 
+    [Header("TalkWindowの使用許可")]
+    public bool isFixedTalkWindowUsing;   // インスペクターで確認した後はprivate修飾子に変更してもよい
+
+    private UIManager uiManager;　　　　　 // UIManager スクリプトの情報を代入するための変数
+
+
     private DialogController dialogController;   // DialogControllerスクリプトの情報を代入するための変数
 
     private Vector3 defaultPos;
@@ -33,14 +39,20 @@ public class NonPlayerCharacter : MonoBehaviour
         offsetPos = new Vector3(dialogController.transform.position.x, dialogController.transform.position.y - 3.0f, dialogController.transform.position.z);
 
         // DataBaseManagerに登録したスクリプタブル・オブジェクトを検索し、指定した通し番号のEventDataを取得して代入
-        eventData = DataBaseManager.instance.GetEventDataFromNPCEvent(npcTalkEventNo);
+        eventData = DataBaseManager.instance.GetEventDataFromEvent(npcTalkEventNo, eventType);
+
+        // 固定型の会話ウィンドウを利用する場合
+        // if (isFixedTalkWindowUsing)
+        // {
+        //    uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // }
     }
 
-    /// <summary>
-    /// 会話開始
-    /// </summary>
-    /// <param name="playerPos"></param>
-    public void PlayTalk(Vector3 playerPos)
+/// <summary>
+/// 会話開始
+/// </summary>
+/// <param name="playerPos"></param>
+public void PlayTalk(Vector3 playerPos)
     {
         // 会話イベントを行っている状態にする
         isTalking = true;
@@ -54,10 +66,19 @@ public class NonPlayerCharacter : MonoBehaviour
             dialogController.transform.position = defaultPos;  // 会話ウィンドウを元の位置に表示
         }
 
-        // 会話イベントのウィンドウを表示
-        dialogController.DisplayDialog(eventData);
+        // 設定されている会話ウインドウの種類に合わせて、開く会話ウインドウを分岐させる
+        if (isFixedTalkWindowUsing)
+        { 
+            uiManager.OpenTalkWindow(eventData);　// 固定型の会話ウインドウを表示する
+        }
+        else
+        {            
+            dialogController.DisplayDialog(eventData); // 稼働型の会話イベントのウインドウを表示する
+        }
 
-        // Debug.Log("会話ウィンドウを開く");
+        // 会話イベントのウィンドウを表示
+        // dialogController.DisplayDialog(eventData);
+
     }
 
     /// <summary>
@@ -68,10 +89,28 @@ public class NonPlayerCharacter : MonoBehaviour
         // 会話イベントを行っていない状態にする
         isTalking = false;
 
-        // 会話イベントのウィンドウを閉じる
-        dialogController.HideDialog();
+        // 設定されている会話ウインドウの種類に合わせて、会話イベントのウィンドウを閉じる
+        if (isFixedTalkWindowUsing)
+        {
+            uiManager.CloseTalkWindow();
+        }
+        else
+        {
+            dialogController.HideDialog();
+        }
 
-        // Debug.Log("会話ウィンドウを閉じる");
+        // 会話イベントのウィンドウを閉じる
+        // dialogController.HideDialog();
     }
 
+    /// <summary>
+    /// 固定型会話ウインドウを利用するための設定
+    /// </summary>
+    /// <param name="uiManager"></param>
+    public void SetUpFixedTalkWindow(UIManager uiManager)
+    {
+        this.uiManager = uiManager;
+
+        isFixedTalkWindowUsing = true;
+    }
 }

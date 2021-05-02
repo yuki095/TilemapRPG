@@ -22,11 +22,10 @@ public class PlayerController : MonoBehaviour
 
     private EncountManager encountManager;   // EncountManagerクラスの情報を代入するための変数
 
-
     [SerializeField]
     private OperationStatusWindow operationStatusWindow = null;  // アイテムインベントリーウィンドウの参照用
 
-    private string[] actionlayerMasks = new string[2] { "NPC", "TresureBox" };　// LayerMaskの設定
+    private string[] actionlayerMasks = new string[2] { "NPC", "TreasureBox" };　// LayerMaskの設定
 
     // isTalkingのプロパティ（private修飾子のまま外部クラスから参照できる）
     public bool IsTalking

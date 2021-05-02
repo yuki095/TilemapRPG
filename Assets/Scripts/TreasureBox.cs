@@ -26,6 +26,10 @@ public class TreasureBox : MonoBehaviour
 
     private PlayerController playerController;
 
+    private void Start()
+    {
+        SetUpTresureBox();
+    }
 
     /// <summary>
     /// 探索イベントの準備
@@ -41,7 +45,7 @@ public class TreasureBox : MonoBehaviour
         offsetPos = new Vector3(dialogController.transform.position.x, dialogController.transform.position.y - 5.0f, dialogController.transform.position.z);
 
         // 対象物のEventDataを取得
-        eventData = DataBaseManager.instance.GetEventDataFromNPCEvent(treasureEventNo);
+        eventData = DataBaseManager.instance.GetEventDataFromEvent(treasureEventNo, eventType);
     }
 
     /// <summary>

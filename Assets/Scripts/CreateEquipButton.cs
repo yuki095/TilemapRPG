@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class CreateEquipButton : MonoBehaviour
 {
 	// 主人公キャラクターのステータス
-	private StatusWindowStatus statusWindowStatus;
+	public StatusWindowStatus statusWindowStatus;
 
 	// アイテムデータベース
-	private StatusWindowItemDataBase statusWindowItemDataBase;
+	public StatusWindowItemDataBase statusWindowItemDataBase;
 
 	// Equipボタンのプレハブ
 	public GameObject equipButtonPrefab;
@@ -22,8 +22,8 @@ public class CreateEquipButton : MonoBehaviour
 		// EquipItemAreaを無効化
 		GetComponent<CanvasGroup>().interactable = false;
 
-		statusWindowStatus = Camera.main.GetComponent<StatusWindowStatus>();
-		statusWindowItemDataBase = Camera.main.GetComponent<StatusWindowItemDataBase>();
+		// statusWindowStatus = Camera.main.GetComponent<StatusWindowStatus>();
+		// statusWindowItemDataBase = Camera.main.GetComponent<StatusWindowItemDataBase>();
 		item = new GameObject[statusWindowItemDataBase.GetItemTotal()];
 
 		// アイテム総数分アイテムボタンを作成
@@ -31,8 +31,7 @@ public class CreateEquipButton : MonoBehaviour
 		{
 			// アイテムタイプが使用アイテム、またはアイテムを持っていない時は次に進む
 			if (statusWindowItemDataBase.GetItemData()[i].GetItemType() == StatusWindowItemDataBase.Item.UseItem
-				|| !statusWindowStatus.GetItemFlag(i)
-			)
+				|| !statusWindowStatus.GetItemFlag(i))
 			{
 				continue;
 			}
