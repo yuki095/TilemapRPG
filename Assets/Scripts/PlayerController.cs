@@ -141,6 +141,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Action()
     {
+        if (isTalking)
+        {
+            return;
+        }
+
         if (Input.GetButtonDown("Action"))
         {
             // プレイヤーの位置を起点として【rb.position】
@@ -161,7 +166,7 @@ public class PlayerController : MonoBehaviour
                     // 取得したNonPlayerCharacterクラスをもつオブジェクトと会話中ではない場合
                     if (!npc.isTalking)  //!は否定
                     {
-                        npc.PlayTalk(transform.position);   // NPCとの会話イベント発生
+                        npc.PlayTalk(transform.position, this);   // NPCとの会話イベント発生
                         isTalking = true;                   // プレイヤーを会話中にする
                     }
                     // 会話中である場合

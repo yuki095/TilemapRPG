@@ -78,17 +78,17 @@ public class TreasureBox : MonoBehaviour
         }
 
         // 設定されている会話ウインドウの種類に合わせて、開く会話ウインドウを分岐させる
-        if (isFixedTalkWindowUsing)
-        {
-            uiManager.OpenTalkWindow(eventData);　// 固定型の会話ウインドウを表示する
-        }
-        else
-        {
-            dialogController.DisplayDialog(eventData); // 稼働型の会話イベントのウインドウを表示する
-        }
+        // if (isFixedTalkWindowUsing)
+        // {
+        //    uiManager.OpenTalkWindow(eventData);　// 固定型の会話ウインドウを表示する
+        // }
+        // else
+        // {
+        //     dialogController.DisplayDialog(eventData); // 稼働型の会話イベントのウインドウを表示する
+        // }
 
         // 探索イベント用の会話ウィンドウを開く
-        // dialogController.DisplaySearchDialog(eventData, this);
+        dialogController.DisplaySearchDialog(eventData, this);
     }
 
     /// <summary>
@@ -143,10 +143,10 @@ public class TreasureBox : MonoBehaviour
     /// 固定型会話ウインドウを利用するための設定
     /// </summary>
     /// <param name="uiManager"></param>
-    public void SetUpFixedTalkWindow(UIManager uiManager)
-    {
-        this.uiManager = uiManager;
+    // public void SetUpFixedTalkWindow(UIManager uiManager)
+    // {
+    //    this.uiManager = uiManager;
 
-        isFixedTalkWindowUsing = true;
-    }
+    //    isFixedTalkWindowUsing = true;
+    // }
 }

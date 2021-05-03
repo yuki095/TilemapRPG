@@ -27,9 +27,9 @@ public class UIManager : MonoBehaviour
     /// 固定型の会話ウインドウを表示
     /// </summary>
     /// <param name="eventData"></param>
-    public void OpenTalkWindow(EventData eventData)
+    public void OpenTalkWindow(EventData eventData, NonPlayerCharacter nonPlayerCharacter)
     {
-        dialogController.DisplayDialog(eventData);
+        StartCoroutine(dialogController.DisplayDialog(eventData, nonPlayerCharacter));
     }
 
     /// <summary>

@@ -12,13 +12,14 @@ public class NonPlayerCharacter : MonoBehaviour
 
     private UIManager uiManager;　　　　　 // UIManager スクリプトの情報を代入するための変数
 
-
     private DialogController dialogController;   // DialogControllerスクリプトの情報を代入するための変数
 
     private Vector3 defaultPos;
     private Vector3 offsetPos;
 
     private EventData.EventType eventType = EventData.EventType.Talk;   // NPCとの会話イベントとして設定
+
+    private PlayerController playerController;
 
     [SerializeField, Header("NPC会話イベントの通し番号")]
     private int npcTalkEventNo;
@@ -52,8 +53,13 @@ public class NonPlayerCharacter : MonoBehaviour
 /// 会話開始
 /// </summary>
 /// <param name="playerPos"></param>
-public void PlayTalk(Vector3 playerPos)
+public void PlayTalk(Vector3 playerPos, PlayerController playerController)
     {
+        if (this.playerController == null)
+        {
+            this.playerController = playerController;
+        }
+
         // 会話イベントを行っている状態にする
         isTalking = true;
 
@@ -69,11 +75,11 @@ public void PlayTalk(Vector3 playerPos)
         // 設定されている会話ウインドウの種類に合わせて、開く会話ウインドウを分岐させる
         if (isFixedTalkWindowUsing)
         { 
-            uiManager.OpenTalkWindow(eventData);　// 固定型の会話ウインドウを表示する
+            uiManager.OpenTalkWindow(eventData,this);　// 固定型の会話ウインドウを表示する
         }
         else
         {            
-            dialogController.DisplayDialog(eventData); // 稼働型の会話イベントのウインドウを表示する
+            StartCoroutine(dialogController.DisplayDialog(eventData, this)); // 稼働型の会話イベントのウインドウを表示する
         }
     }
 
@@ -94,6 +100,9 @@ public void PlayTalk(Vector3 playerPos)
         {
             dialogController.HideDialog();
         }
+
+        // 会話終了状態にする
+        playerController.IsTalking = false;
     }
 
     /// <summary>

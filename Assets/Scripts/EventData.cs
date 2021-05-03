@@ -17,7 +17,7 @@ public enum EventType
     public string title;            // タイトル、NPCの名前、探す対象物の名前など
 
     [Multiline]                     // 複数行のテキスト
-    public string dialog;           // NPCのメッセージ、対象物のメッセージなど
+    public string[] dialogs;        // NPCのメッセージ、対象物のメッセージなど
 
     public Sprite eventSprite;      // イベントの画像データ
 
