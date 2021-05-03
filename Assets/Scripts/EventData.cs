@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class EventData
@@ -23,6 +24,23 @@ public enum EventType
 
     public ItemName eventItemName; // イベントで獲得できるアイテム
     public int eventItemCount;     // イベントで獲得できるアイテムの個数
+
+
+    [System.Serializable]
+    public class EventDataDetail
+    {
+        public EventProgressType eventProgressType;
+
+        [Multiline]
+        public string[] dialogs;       　　　  // NPC のメッセージ、対象物のメッセージなど
+
+        public Sprite eventSprite;     　　　　// イベントの画像データ
+
+        public ItemName[] eventItemNames;      // イベントに必要なアイテム、あるいは獲得できるアイテム（配列）
+        public int[] eventItemCounts;          // イベントに必要な個数、あるいは入手できる個数（配列）
+    }
+
+    public List<EventDataDetail> eventDataDetailsList = new List<EventDataDetail>();
 
     // TODO　その他
 }

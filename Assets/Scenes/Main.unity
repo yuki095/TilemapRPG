@@ -461,10 +461,11 @@ MonoBehaviour:
     eventType: 1
     no: 0
     title: 
-    dialog: 
+    dialogs: []
     eventSprite: {fileID: 0}
     eventItemName: 0
     eventItemCount: 0
+    eventDataDetailsList: []
 --- !u!1 &141114331
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,10 +2761,11 @@ MonoBehaviour:
     eventType: 0
     no: 0
     title: 
-    dialog: 
+    dialogs: []
     eventSprite: {fileID: 0}
     eventItemName: 0
     eventItemCount: 0
+    eventDataDetailsList: []
 --- !u!61 &637412646
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6216,18 +6218,11 @@ MonoBehaviour:
   randomEncountRate: 100
   isEncounting: 0
   isDebug: 1
-  itemInventryDatasList:
-  - itemName: 0
-    count: 1
-    number: 0
-  - itemName: 1
-    count: 1
-    number: 1
-  - itemName: 2
-    count: 1
-    number: 2
+  itemInventryDatasList: []
   getSearchEventNumsList: 
   useTalkWindowType: 0
+  clearTalkEventNumsList: 
+  money: 0
 --- !u!4 &1162999564
 Transform:
   m_ObjectHideFlags: 0
@@ -6303,10 +6298,11 @@ MonoBehaviour:
     eventType: 0
     no: 0
     title: 
-    dialog: 
+    dialogs: []
     eventSprite: {fileID: 0}
     eventItemName: 0
     eventItemCount: 0
+    eventDataDetailsList: []
 --- !u!225 &1212544900
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -6572,10 +6568,11 @@ MonoBehaviour:
     eventType: 0
     no: 0
     title: 
-    dialog: 
+    dialogs: []
     eventSprite: {fileID: 0}
     eventItemName: 0
     eventItemCount: 0
+    eventDataDetailsList: []
 --- !u!61 &1271441946
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7465,10 +7462,11 @@ MonoBehaviour:
     eventType: 0
     no: 0
     title: 
-    dialog: 
+    dialogs: []
     eventSprite: {fileID: 0}
     eventItemName: 0
     eventItemCount: 0
+    eventDataDetailsList: []
 --- !u!225 &1436824041
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -16394,10 +16392,11 @@ MonoBehaviour:
     eventType: 0
     no: 0
     title: 
-    dialog: 
+    dialogs: []
     eventSprite: {fileID: 0}
     eventItemName: 0
     eventItemCount: 0
+    eventDataDetailsList: []
 --- !u!1 &1790251564
 GameObject:
   m_ObjectHideFlags: 0

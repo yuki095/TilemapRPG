@@ -88,7 +88,8 @@ public class TreasureBox : MonoBehaviour
         // }
 
         // 探索イベント用の会話ウィンドウを開く
-        dialogController.DisplaySearchDialog(eventData, this);
+        // dialogController.DisplaySearchDialog(eventData, this);
+        StartCoroutine(dialogController.DisplaySearchDialog(eventData, this));
     }
 
     /// <summary>
