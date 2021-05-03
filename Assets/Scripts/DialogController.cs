@@ -26,8 +26,8 @@ public class DialogController : MonoBehaviour
 
     private int currentTalkCount;   // 会話回数（bool型でもOK）
 
+    // ？？
     private EventData.EventDataDetail eventDataDetail;
-
     private bool isClick;
 
     private void Start()

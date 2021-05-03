@@ -6218,7 +6218,10 @@ MonoBehaviour:
   randomEncountRate: 100
   isEncounting: 0
   isDebug: 1
-  itemInventryDatasList: []
+  itemInventryDatasList:
+  - itemName: 0
+    count: 1
+    number: 0
   getSearchEventNumsList: 
   useTalkWindowType: 0
   clearTalkEventNumsList: 
