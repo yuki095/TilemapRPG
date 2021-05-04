@@ -55,7 +55,12 @@ MonoBehaviour:
   - eventType: 1
     no: 0
     title: "\u5B9D\u7BB1"
-    eventDataDetailsList: []
+    eventDataDetailsList:
+    - eventProgressType: 0
+      dialogs: []
+      eventSprite: {fileID: -4249539952858950829, guid: 9a8ec9c2dd63e475a9e3689e4c1e5e0a, type: 3}
+      eventItemNames: 070000000000000001000000
+      eventItemCounts: 640000000300000064000000
   - eventType: 1
     no: 1
     title: "\u5B9D\u7BB1"

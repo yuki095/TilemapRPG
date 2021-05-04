@@ -456,15 +456,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   dialogController: {fileID: 346513843}
-  treasureEventNo: 1
+  isFixedTalkWindowUsing: 1
+  treasureEventNo: 0
   eventData:
     eventType: 1
     no: 0
     title: 
-    dialogs: []
-    eventSprite: {fileID: 0}
-    eventItemName: 0
-    eventItemCount: 0
     eventDataDetailsList: []
 --- !u!1 &141114331
 GameObject:
@@ -2200,10 +2197,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5000
+  far clip plane: 100
   field of view: 40
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2227,7 +2224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.88786, y: -0.8474683, z: -8.736826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2761,10 +2758,6 @@ MonoBehaviour:
     eventType: 0
     no: 0
     title: 
-    dialogs: []
-    eventSprite: {fileID: 0}
-    eventItemName: 0
-    eventItemCount: 0
     eventDataDetailsList: []
 --- !u!61 &637412646
 BoxCollider2D:
@@ -6301,10 +6294,6 @@ MonoBehaviour:
     eventType: 0
     no: 0
     title: 
-    dialogs: []
-    eventSprite: {fileID: 0}
-    eventItemName: 0
-    eventItemCount: 0
     eventDataDetailsList: []
 --- !u!225 &1212544900
 CanvasGroup:
@@ -6571,10 +6560,6 @@ MonoBehaviour:
     eventType: 0
     no: 0
     title: 
-    dialogs: []
-    eventSprite: {fileID: 0}
-    eventItemName: 0
-    eventItemCount: 0
     eventDataDetailsList: []
 --- !u!61 &1271441946
 BoxCollider2D:
@@ -7465,10 +7450,6 @@ MonoBehaviour:
     eventType: 0
     no: 0
     title: 
-    dialogs: []
-    eventSprite: {fileID: 0}
-    eventItemName: 0
-    eventItemCount: 0
     eventDataDetailsList: []
 --- !u!225 &1436824041
 CanvasGroup:
@@ -16395,10 +16376,6 @@ MonoBehaviour:
     eventType: 0
     no: 0
     title: 
-    dialogs: []
-    eventSprite: {fileID: 0}
-    eventItemName: 0
-    eventItemCount: 0
     eventDataDetailsList: []
 --- !u!1 &1790251564
 GameObject:

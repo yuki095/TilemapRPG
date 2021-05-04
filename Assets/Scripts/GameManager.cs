@@ -58,12 +58,12 @@ public class GameManager : MonoBehaviour
                 nonPlayerCharactersList[i].SetUpFixedTalkWindow(uiManager);
             }
 
-            // GameManager クラスの TreasureBox 用の List に登録されているすべてを対象として処理を行う
-            // for (int i = 0; i < treasureBoxesList.Count; i++)
-            // {
-                // 各TreasureBoxにおいて固定型の会話ウインドウを利用するための設定を行う
-            //    treasureBoxesList[i].SetUpFixedTalkWindow(uiManager);
-            // }
+        // GameManager クラスの TreasureBox 用の List に登録されているすべてを対象として処理を行う
+        for (int i = 0; i < treasureBoxesList.Count; i++)
+        {
+        // 各TreasureBoxにおいて固定型の会話ウインドウを利用するための設定を行う
+           treasureBoxesList[i].SetUpFixedTalkWindow(uiManager);
+        }
 
         yield return null;
 

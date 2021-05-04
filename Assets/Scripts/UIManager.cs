@@ -39,4 +39,9 @@ public class UIManager : MonoBehaviour
     {
         dialogController.HideDialog();
     }
+
+    public void OpenSearchWindow(EventData eventData, TreasureBox treasureBox)
+    {
+        StartCoroutine(dialogController.DisplaySearchDialog(eventData, treasureBox));
+    }
 }

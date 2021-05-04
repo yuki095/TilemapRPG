@@ -17,7 +17,7 @@ public class TreasureBox : MonoBehaviour
     private EventData.EventType eventType = EventData.EventType.Search;
 
     [Header("TalkWindowの使用許可")]
-    private bool isFixedTalkWindowUsing;   // インスペクターで確認した後はprivate修飾子に変更してもよい
+    public bool isFixedTalkWindowUsing;   // インスペクターで確認した後はprivate修飾子に変更してもよい
 
     private UIManager uiManager;　　　　　 // UIManager スクリプトの情報を代入するための変数
 
@@ -78,18 +78,18 @@ public class TreasureBox : MonoBehaviour
         }
 
         // 設定されている会話ウインドウの種類に合わせて、開く会話ウインドウを分岐させる
-        // if (isFixedTalkWindowUsing)
-        // {
-        //    uiManager.OpenTalkWindow(eventData);　// 固定型の会話ウインドウを表示する
-        // }
-        // else
-        // {
-        //     dialogController.DisplayDialog(eventData); // 稼働型の会話イベントのウインドウを表示する
-        // }
+        if (isFixedTalkWindowUsing)
+        {
+            uiManager.OpenSearchWindow(eventData, this); // 固定型の会話ウインドウを表示する
+        }
+        else
+        {
+            StartCoroutine(dialogController.DisplaySearchDialog(eventData, this)); // 稼働型の会話イベントのウインドウを表示する
+        }
 
         // 探索イベント用の会話ウィンドウを開く
         // dialogController.DisplaySearchDialog(eventData, this);
-        StartCoroutine(dialogController.DisplaySearchDialog(eventData, this));
+        // StartCoroutine(dialogController.DisplaySearchDialog(eventData, this));
     }
 
     /// <summary>
@@ -146,10 +146,10 @@ public class TreasureBox : MonoBehaviour
     /// 固定型会話ウインドウを利用するための設定
     /// </summary>
     /// <param name="uiManager"></param>
-    // public void SetUpFixedTalkWindow(UIManager uiManager)
-    // {
-    //    this.uiManager = uiManager;
+    public void SetUpFixedTalkWindow(UIManager uiManager)
+    {
+        this.uiManager = uiManager;
 
-    //    isFixedTalkWindowUsing = true;
-    // }
+        isFixedTalkWindowUsing = true;
+    }
 }

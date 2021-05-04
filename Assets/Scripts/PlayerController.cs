@@ -104,6 +104,12 @@ public class PlayerController : MonoBehaviour
         // velocity（速度）に新しい値を代入してゲームオブジェクトを移動
         rb.velocity = new Vector2(horizontal * moveSpeed, vertical * moveSpeed);
 
+        // デバッグ中はエンカウントしない
+        if (GameData.instance.isDebug)
+        {
+            return;
+        }
+
         // プレイヤーのmagnitude（ベクトルの長さ）が0.5よりも大きく（プレイヤーが移動していて）、
         // encountManager変数にEncountManagerの情報が代入されている場合
         if (rb.velocity.magnitude > 0.5f && encountManager)

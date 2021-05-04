@@ -262,13 +262,12 @@ public class DialogController : MonoBehaviour
         {
             bool isClick = false;
 
-            // 獲得したアイテムの名前と数を表示（文字が全部表示されたら）
-            txtDialog.DOText(eventDataDetail.eventItemNames[i].ToString() + " × " + eventDataDetail.eventItemCounts[i] + " 獲得", 1.0f).SetEase(Ease.Linear).OnComplete(() => { isClick = true; });
-
             // 獲得した種類で分岐
             if (eventDataDetail.eventItemNames[i] == ItemName.お金)
             {
-                // TODO お金の加算処理
+                txtDialog.DOText(eventDataDetail.eventItemNames[i].ToString() + " × " + eventDataDetail.eventItemCounts[i] + "ゴールド獲得", 1.0f).SetEase(Ease.Linear).OnComplete(() => { isClick = true; });
+
+                // お金の加算処理
                 GameData.instance.CalculateMoney(eventDataDetail.eventItemCounts[i]);
             }
             else if (eventDataDetail.eventItemNames[i] == ItemName.経験値)
@@ -278,6 +277,9 @@ public class DialogController : MonoBehaviour
             }
             else
             {
+                // 獲得したアイテムの名前と数を表示（文字が全部表示されたら）
+                txtDialog.DOText(eventDataDetail.eventItemNames[i].ToString() + " × " + eventDataDetail.eventItemCounts[i] + "獲得", 1.0f).SetEase(Ease.Linear).OnComplete(() => { isClick = true; });
+
                 // アイテム獲得
                 GameData.instance.AddItemInventryData(eventDataDetail.eventItemNames[i], eventDataDetail.eventItemCounts[i]);
             }
