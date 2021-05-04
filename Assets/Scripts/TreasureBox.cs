@@ -97,6 +97,8 @@ public class TreasureBox : MonoBehaviour
     /// </summary>
     public void CloseTreasureBox()
     {
+        Debug.Log("通過");
+
         playerController.IsTalking = false;
 
         // 設定されている会話ウインドウの種類に合わせて、会話イベントのウィンドウを閉じる
@@ -133,7 +135,7 @@ public class TreasureBox : MonoBehaviour
         if (isOpen)
         {
             // 宝箱の画像を開封済にする
-            spriteRenderer.sprite = eventData.eventSprite;
+            spriteRenderer.sprite = eventData.eventDataDetailsList[0].eventSprite;
 
             // 宝箱自体を非表示にする場合
             // this.gameObject.SetActive(false);

@@ -17,15 +17,6 @@ public enum EventType
     public int no;                  // 通し番号
     public string title;            // タイトル、NPCの名前、探す対象物の名前など
 
-    [Multiline]                     // 複数行のテキスト
-    public string[] dialogs;        // NPCのメッセージ、対象物のメッセージなど
-
-    public Sprite eventSprite;      // イベントの画像データ
-
-    public ItemName eventItemName; // イベントで獲得できるアイテム
-    public int eventItemCount;     // イベントで獲得できるアイテムの個数
-
-
     [System.Serializable]
     public class EventDataDetail
     {

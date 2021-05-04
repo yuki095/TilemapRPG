@@ -16,10 +16,6 @@ MonoBehaviour:
   - eventType: 0
     no: 0
     title: Dog
-    dialogs: []
-    eventSprite: {fileID: 0}
-    eventItemName: 0
-    eventItemCount: 0
     eventDataDetailsList:
     - eventProgressType: 1
       dialogs:
@@ -45,19 +41,10 @@ MonoBehaviour:
   - eventType: 0
     no: 1
     title: "\u6751\u4EBA1"
-    dialogs:
-    - "\u3053\u3093\u306B\u3061\u306F\uFF01"
-    eventSprite: {fileID: 0}
-    eventItemName: 0
-    eventItemCount: 0
     eventDataDetailsList: []
   - eventType: 0
     no: 2
     title: "\u5E97\u54E11"
-    dialogs: []
-    eventSprite: {fileID: 0}
-    eventItemName: 0
-    eventItemCount: 0
     eventDataDetailsList:
     - eventProgressType: 0
       dialogs:
@@ -68,22 +55,13 @@ MonoBehaviour:
   - eventType: 1
     no: 0
     title: "\u5B9D\u7BB1"
-    dialogs: []
-    eventSprite: {fileID: 0}
-    eventItemName: 0
-    eventItemCount: 1
     eventDataDetailsList: []
   - eventType: 1
     no: 1
     title: "\u5B9D\u7BB1"
-    dialogs: []
-    eventSprite: {fileID: -4249539952858950829, guid: 9a8ec9c2dd63e475a9e3689e4c1e5e0a, type: 3}
-    eventItemName: 0
-    eventItemCount: 1
     eventDataDetailsList:
     - eventProgressType: 3
-      dialogs:
-      - "\u85AC\u8349\xD7\uFF11\u3000\u7372\u5F97"
+      dialogs: []
       eventSprite: {fileID: -4249539952858950829, guid: 9a8ec9c2dd63e475a9e3689e4c1e5e0a, type: 3}
       eventItemNames: 00000000
       eventItemCounts: 01000000

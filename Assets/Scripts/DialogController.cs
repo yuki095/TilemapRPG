@@ -26,10 +26,6 @@ public class DialogController : MonoBehaviour
 
     private int currentTalkCount;   // 会話回数（bool型でもOK）
 
-    // ？？
-    private EventData.EventDataDetail eventDataDetail;
-    private bool isClick;
-
     private void Start()
     {
         SetUpDialog();      // ダイアログの設定
@@ -240,6 +236,8 @@ public class DialogController : MonoBehaviour
 
         // アイテム獲得
         yield return StartCoroutine(GetEventItems(eventData.eventDataDetailsList[0]));
+        // 閉じる
+        treasureBox.CloseTreasureBox();
 
         // 獲得した宝箱の番号を GameData に追加
         GameData.instance.AddSearchEventNum(treasureBox.treasureEventNo);
@@ -257,12 +255,14 @@ public class DialogController : MonoBehaviour
     /// アイテム獲得
     /// </summary>
     /// <param name="eventData"></param>
-    private IEnumerator GetEventItems(EventData.EventDataDetail eventData)
+    private IEnumerator GetEventItems(EventData.EventDataDetail eventDataDetail)
     {
         // 獲得したアイテムの種類分だけ繰り返す
         for (int i = 0; i < eventDataDetail.eventItemNames.Length; i++)
         {
-            // 獲得したアイテムの名前と数を表示
+            bool isClick = false;
+
+            // 獲得したアイテムの名前と数を表示（文字が全部表示されたら）
             txtDialog.DOText(eventDataDetail.eventItemNames[i].ToString() + " × " + eventDataDetail.eventItemCounts[i] + " 獲得", 1.0f).SetEase(Ease.Linear).OnComplete(() => { isClick = true; });
 
             // 獲得した種類で分岐
@@ -282,11 +282,13 @@ public class DialogController : MonoBehaviour
                 GameData.instance.AddItemInventryData(eventDataDetail.eventItemNames[i], eventDataDetail.eventItemCounts[i]);
             }
 
-            // アクションボタンを押すと次のメッセージ表示
+            // アクションボタンが押されて、かつ文字が全部表示されたら次のメッセージ表示
             yield return new WaitUntil(() => Input.GetButtonDown("Action") && isClick);
             txtDialog.text = "";
             yield return null;
         }
+
+        isTalk = false;
     }
 
     /// <summary>

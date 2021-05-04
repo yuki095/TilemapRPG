@@ -179,9 +179,7 @@ public class PlayerController : MonoBehaviour
 
                 // そのオブジェクトにアタッチされているTreasureBoxクラスが取得できた場合
                 else if (hit.collider.TryGetComponent(out TreasureBox treasureBox))
-                {
-                    Debug.Log("通過");
-
+                { 
                     // 宝箱をまだ開けたことがない場合（探索済みでない場合）
                     if (!treasureBox.isOpen)
                     {
